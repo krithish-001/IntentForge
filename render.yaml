@@ -20,10 +20,10 @@ services:
       - key: PORT
         value: "8000"
       - key: MONGODB_URI
-        value: "mongodb+srv://krithikvasan145_db_user:Krithish@cluster0.oxlwqla.mongodb.net/flipkart?retryWrites=true&w=majority&appName=Cluster0"
+        sync: false
       - key: ES_URL
-        value: "https://8270da328f:ef38beab632812d4f199@daring-cocobolo-1nj8bekd.us-east-1.bonsaisearch.net"
+        sync: false
       - key: REDIS_URL
-        value: "rediss://default:gQAAAAAAAWc4AAIncDIyOGJhNTgzOTk1MjE0NmZlOWViOWU1OGE1MzhlMDNlMXAyOTE5NjA@summary-mallard-91960.upstash.io:6379"
+        sync: false
       - key: SRP_API_URL
-        value: "https://intentforge-srp.onrender.com"
+        sync: false
