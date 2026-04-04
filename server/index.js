@@ -12,12 +12,12 @@ import compression from 'compression';
 dotenv.config();
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
-app.use(compression()); // Add this before other middleware
+app.use(compression());
 
-// --- ELASTICSEARCH & REDIS SETUP ---
-export const esClient = new Client({ node: 'http://localhost:9200' });
+// --- ELASTICSEARCH SETUP ---
+export const esClient = new Client({ node: process.env.ES_URL });
 const indexName = 'products';
 
 async function setupElasticsearch() {
@@ -36,11 +36,10 @@ async function setupElasticsearch() {
         body: {
             mappings: {
                 properties: {
-                    // Do NOT include _id here!
                     name: { type: 'search_as_you_type' },
                     category: { type: 'text' },
                     suggest: { type: 'completion' },
-                    rating: { type: 'float' } // Added rating field for sorting
+                    rating: { type: 'float' }
                 }
             }
         }
@@ -56,7 +55,7 @@ async function setupElasticsearch() {
                 doc.category,
                 ...(doc.title.longTitle ? doc.title.longTitle.split(' ') : [])
             ].filter(Boolean),
-            rating: doc.rating || 0 // Added rating to indexed data
+            rating: doc.rating || 0
         };
         return [{ index: { _index: indexName, _id: doc._id.toString() } }, source];
     });
@@ -88,7 +87,9 @@ Connection()
 // Middleware and routes
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 app.use('/', Routes);
 
 // Start the server
