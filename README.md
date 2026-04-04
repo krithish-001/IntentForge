@@ -1,12 +1,11 @@
-<<<<<<< HEAD
 # Flipkart Grid Search: AI-Powered Semantic Search Engine 🚀
 
 ![Status](https://img.shields.io/badge/status-production_ready-green)
 ![React](https://img.shields.io/badge/React-17.0.2-blue?logo=react)
-![Node.js](https://img.shields.io/badge/Node.js-16.x-green?logo=node.js)
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green?logo=node.js)
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![MongoDB](https://img.shields.io/badge/MongoDB-5.x-green?logo=mongodb)
-![Elasticsearch](https://img.shields.io/badge/Elasticsearch-7.x-blue?logo=elasticsearch)
+![Elasticsearch](https://img.shields.io/badge/Elasticsearch-8.x-blue?logo=elasticsearch)
 ![Redis](https://img.shields.io/badge/Redis-6.x-red?logo=redis)
 
 This repository delivers an enterprise-grade, AI-powered personalized e-commerce search engine. It moves beyond simple keyword matching to **understand user intent**, delivering a hyper-relevant, intelligent, and incredibly fast shopping experience modeled after Flipkart's advanced search capabilities.
@@ -118,8 +117,6 @@ sequenceDiagram
     participant DB as MongoDB
 
     title Search & Ranking Flow with Reranker
-
-    %% --- Autosuggest Flow ---
     Note over U, ES: Initial Query & Autosuggest
     U->>UI: Types "washin machin"
     UI->>API: GET /autosuggest?q=washin machin
@@ -202,17 +199,15 @@ This is a multi-service application. The easiest way to run it is with four sepa
 
 ### Prerequisites
 
-*   Node.js (v16+) & npm
+*   Node.js (v18+) & npm
 *   Python (v3.10+) & pip
 *   Docker & Docker Compose (or a local ChromaDB install)
 
 ### Step 1: Clone the Repository & Configure
 ---
 ```bash
-git clone https://github.com/Darkcaptain007/Grid-Flipkart.git
-cd Grid-Flipkart
-or
-cd Grid-Flipkart-main
+git clone https://github.com/krithish-001/IntentForge.git
+cd IntentForge
 
 # Create the .env file for the Node server
 cp server/.env.example server/.env
@@ -276,7 +271,7 @@ cd client
 npm install
 npm start
 ```
-*Your application will be available at `http://localhost:8000`.*
+*Your application will be available at `http://localhost:3000`.*
 
 **➡️ Terminal 6: Index Your Data (One-Time Setup)**
 This step is **critical** and populates your databases. Run these commands from the project root.
@@ -289,7 +284,7 @@ This step is **critical** and populates your databases. Run these commands from 
 ```
 After doing this, **restart the Node.js server (Terminal 1)** for it to create the Elasticsearch indices with the new data. The server will be hosted on  `http://localhost:8001`.
 
-**You are all set!** Open `http://localhost:8000` and experience the search.
+**You are all set!** Open `http://localhost:3000` and experience the search.
 
 -----
 
@@ -309,6 +304,7 @@ After doing this, **restart the Node.js server (Terminal 1)** for it to create t
 ## 🎥 Tech Stack Walkthrough (Live Demo)
 
 Watch the [YouTube](https://www.youtube.com/watch?v=baw8FdGVHKs&feature=youtu.be) demo here.
-=======
+
+---
 # IntentForge
->>>>>>> 1372192a63c72ed55c110bd03e797df9a075f53e
+Dedicated implementation for intelligent e-commerce hybrid search.
