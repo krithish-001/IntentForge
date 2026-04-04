@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Box, Typography, makeStyles } from '@material-ui/core';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 const useStyles = makeStyles(theme => ({
   categoryRow: { /* your styles (horizontal, scrollable row) */ },
   categoryTab: { /* styles for each category tab */ },
@@ -29,14 +31,14 @@ const CategoryMenu = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/categories')
+    axios.get(`${API_URL}/api/categories`)
       .then(res => setCategories(res.data))
       .catch(err => console.error('Failed to fetch categories', err));
   }, []);
 
   const handleCategoryHover = (category) => {
     setHoveredCategory(category);
-    axios.get(`/api/categories/${encodeURIComponent(category)}/subcategories`)
+    axios.get(`${API_URL}/api/categories/${encodeURIComponent(category)}/subcategories`)
       .then(res => setSubcategories(res.data))
       .catch(err => {
         setSubcategories([]);
@@ -61,7 +63,6 @@ const CategoryMenu = () => {
         >
           <Typography>{cat}</Typography>
 
-          {/* Subcategory dropdown */} 
           {hoveredCategory === cat && subcategories.length > 0 && (
             <Box className={classes.subcategoryDropdown}>
               {subcategories.map(sub => (
