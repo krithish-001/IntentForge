@@ -101,7 +101,7 @@ const MultiSlide = ({ data, timer, title }) => {
                 itemClass="carousel-item-padding-40-px"
             >
                 {
-                    data.map(temp => (
+                    (data || []).map(temp => (
                         <Link to={`product/${temp.id}`} style={{textDecoration: 'none'}}>
                             <Box textAlign="center" className={classes.wrapper}>
                                 <img src={temp.url} className={classes.image} alt="" />

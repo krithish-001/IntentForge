@@ -85,8 +85,9 @@ const Search = () => {
         return;
       }
       try {
+        const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
         const { data } = await axios.get(
-          `http://localhost:8000/autosuggest?q=${encodeURIComponent(text)}${account ? `&userId=${encodeURIComponent(account)}` : ''}`
+          `${url}/autosuggest?q=${encodeURIComponent(text)}${account ? `&userId=${encodeURIComponent(account)}` : ''}`
         );
         setResults(data.slice(0, 8));
         suggestionCache.current.set(text, data.slice(0, 8));
@@ -105,7 +106,10 @@ const Search = () => {
   const onSuggestionClick = async (suggestion) => {
     if (suggestion.type === 'product') {
       if (account && suggestion.id) {
-        try { await axios.post('http://localhost:8000/click', { userId: account, productId: suggestion.id }); }
+        try { 
+          const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+          await axios.post(`${url}/click`, { userId: account, productId: suggestion.id }); 
+        }
         catch (e) { console.error('Click tracking failed:', e); }
       }
       history.push(`/product/${suggestion.id}`);
@@ -120,7 +124,10 @@ const Search = () => {
         displayQuery = suggestion.name;
       }
       if (searchTarget && account) {
-        try { await axios.post('http://localhost:8000/click', { userId: account, category: searchTarget }); }
+        try { 
+          const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+          await axios.post(`${url}/click`, { userId: account, category: searchTarget }); 
+        }
         catch (e) { console.error('Category/Term click tracking failed:', e); }
       }
       history.push(`/search?q=${encodeURIComponent(searchTarget)}&oq=${encodeURIComponent(displayQuery)}`);

@@ -231,7 +231,8 @@ const SearchResultsPage = () => {
     try {
         // This user ID is hardcoded in your original file, keeping it for consistency.
         const userId = '123'; 
-        const { data } = await axios.get(`http://localhost:8000/search?q=${query}&userId=${userId}`);
+        const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const { data } = await axios.get(`${url}/search?q=${query}&userId=${userId}`);
         
         // The 'data' variable now contains the final array of full product objects.
         // We can use it directly.
@@ -351,7 +352,8 @@ const SearchResultsPage = () => {
 
     const handleProductClick = async (productId) => {
         try {
-            await axios.post('http://localhost:8000/click', {
+            const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+            await axios.post(`${url}/click`, {
                 userId: '123',
                 productId: productId
             });

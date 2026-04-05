@@ -4,7 +4,8 @@ import axios from 'axios';
 export const getProducts = () => async (dispatch) => {
     try {
         console.log('Fetching products...')
-        const { data } = await axios.get(`http://localhost:8000/products`);
+        const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const { data } = await axios.get(`${url}/products`);
         
         // Add id field to each product for consistency
         const productsWithId = data.map(product => ({
@@ -23,7 +24,8 @@ export const getProductDetails = (id) => async (dispatch) => {
         dispatch({ type: actionTypes.GET_PRODUCT_DETAILS_REQUEST });
         console.log('Fetching product details for ID:', id);
         
-        const { data } = await axios.get(`http://localhost:8000/product/${id}`);
+        const url = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const { data } = await axios.get(`${url}/product/${id}`);
         console.log('Product details response:', data);
 
         if (data) {

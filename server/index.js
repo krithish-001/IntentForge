@@ -93,4 +93,4 @@ app.use(cors({
 app.use('/', Routes);
 
 // Start the server
-app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
+app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));  
